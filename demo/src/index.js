@@ -24,7 +24,7 @@ class Demo extends Component {
           by Jason Ford
         </p>
         <p>
-          <a href="https://github.com/rajasegar/react-awesome-datepicker-demo">
+          <a href="https://github.com/rajasegar/react-rethink-datepicker">
             Github
           </a>
         </p>
