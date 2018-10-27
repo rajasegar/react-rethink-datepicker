@@ -5,9 +5,7 @@
 [![Coveralls][coveralls-badge]][coveralls]
 
 
-Rethinking the date picker UI
-
-Making date selection work for humans
+Rethinking the date picker UI by making date selection work for humans
 
 Based on this article by Jason Ford
 https://uxdesign.cc/rethinking-the-date-picker-ui-99b9dcb303ad
@@ -22,7 +20,7 @@ Default usage:
 With default date set as today:
 ```html
 <DatePicker showToday/>
-```html
+```
 
 With locale:
 ```html
@@ -32,7 +30,7 @@ With locale:
 Getting selected date value on a callback:
 ```js
 onDateSelect(d) {
-console.log(d.toString());
+  console.log(d.toString());
 }
 ```
 
