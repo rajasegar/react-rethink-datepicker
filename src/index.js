@@ -142,30 +142,16 @@ class DatePicker extends Component {
 
   onDatePicked(y) {
     const { date, month } = this.state;
+    const _formatted = `${date}/${month}/${y}`;
+    const dateObj = new Date(y, month - 1, date);
     this.setState({
       showDropdown: false,
       showYearPicker: false,
       year: y,
-      formattedDate: `${date}/${month}/${y}`
+      formattedDate: _formatted
     });
 
-    /*
-
-    const locales = {
-      en: require("date-fns/locale/en"),
-      eo: require("date-fns/locale/eo"),
-      ru: require("date-fns/locale/ru"),
-      fr: require("date-fns/locale/fr")
-    };
-
-    console.log(year, month, date);
-    window.__localeId__ = "fr";
-    console.log(
-      format(new Date(2018, month, date), "DD MMMM, YYYY", {
-        locale: locales[window.__localeId__]
-      })
-    );
-    */
+    this.props.onDatePicked(dateObj);
   }
 
   onDateChange(e) {
@@ -194,18 +180,24 @@ class DatePicker extends Component {
         showDropdown: false,
         showYearPicker: false
       });
+      const dateObj = new Date(_year, _month - 1, _date);
+      this.props.onDatePicked(dateObj);
     }
 
     this.setState({ formattedDate: _value });
   }
 
   render() {
+    let { locale } = this.props;
+    locale = locale || "en";
     const {
       showDayPicker,
       showMonthPicker,
       showYearPicker,
       showDropdown,
       date,
+      month,
+      year,
       formattedDate
     } = this.state;
     return (
@@ -219,11 +211,20 @@ class DatePicker extends Component {
           />
         </TriggerWrapper>
         <Dropdown in={showDropdown}>
-          {showDayPicker && <DayPicker onDatePicked={this.renderMonthPicker} />}
-          {showMonthPicker && (
-            <MonthPicker date={date} onMonthPicked={this.renderYearPicker} />
+          {showDayPicker && (
+            <DayPicker selected={date} onDatePicked={this.renderMonthPicker} />
           )}
-          {showYearPicker && <YearPicker onYearPicked={this.onDatePicked} />}
+          {showMonthPicker && (
+            <MonthPicker
+              selected={month}
+              date={date}
+              onMonthPicked={this.renderYearPicker}
+              locale={locale}
+            />
+          )}
+          {showYearPicker && (
+            <YearPicker selected={year} onYearPicked={this.onDatePicked} />
+          )}
         </Dropdown>
       </Wrapper>
     );

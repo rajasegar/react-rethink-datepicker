@@ -3,11 +3,6 @@ import styled from "styled-components";
 import transition from "styled-transition-group";
 import { format } from "date-fns";
 
-const locales = {
-  es: require("date-fns/locale/es"),
-  fr: require("date-fns/locale/fr")
-};
-
 const Wrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -25,8 +20,9 @@ const Caption = styled.p`
   text-align: center;
 `;
 const MonthButton = styled.button`
-  background: none;
-  border: ${props => (props.currentMonth ? "1px solid black" : "none")};
+  background: ${props => (props.selected ? "green" : "none")};
+  border: ${props => (props.currentMonth ? "1px dashed black" : "none")};
+  color: ${props => (props.selected ? "white" : "black")};
   cursor: pointer;
   padding: 8px;
   text-align: center;
@@ -109,9 +105,11 @@ class DatePicker extends Component {
       "November"
     ];
 
-    const { date } = this.props;
+    const { date, selected, locale } = this.props;
     const { show } = this.state;
     const today = new Date();
+    const getLocale = locale => require(`date-fns/locale/${locale}/index.js`);
+
     return (
       <Transition in={show}>
         <Caption>Select month</Caption>
@@ -126,12 +124,13 @@ class DatePicker extends Component {
               }
               data-month={index + 1}
               currentMonth={index === today.getMonth()}
+              selected={index === selected - 1}
             >
               {format(
                 new Date(today.getFullYear(), months.indexOf(m), date),
                 "MMMM",
                 {
-                  locale: locales["en"]
+                  locale: getLocale(locale)
                 }
               )}
             </MonthButton>

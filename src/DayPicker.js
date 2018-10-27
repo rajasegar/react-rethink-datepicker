@@ -17,8 +17,9 @@ const Caption = styled.p`
   text-align: center;
 `;
 const DayButton = styled.button`
-  background: none;
-  border: ${props => (props.currentDate ? "1px solid black" : "none")};
+  background: ${props => (props.selected ? "green" : "none")};
+  border: ${props => (props.currentDate ? "1px dashed black" : "none")};
+  color: ${props => (props.selected ? "white" : "black")};
   cursor: pointer;
   padding: 4px;
   text-align: center;
@@ -46,6 +47,7 @@ class DatePicker extends Component {
   }
 
   render() {
+    const { selected } = this.props;
     const days = [];
     const currentDate = new Date().getDate();
     for (let i = 0; i < 31; i++) days.push(i + 1);
@@ -58,6 +60,7 @@ class DatePicker extends Component {
               key={d}
               onClick={this.pickDate}
               currentDate={d === currentDate}
+              selected={d === selected}
             >
               {d}
             </DayButton>

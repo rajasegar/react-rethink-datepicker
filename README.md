@@ -14,16 +14,32 @@ https://uxdesign.cc/rethinking-the-date-picker-ui-99b9dcb303ad
 
 
 ## Usage
+Default usage:
 ```html
 <DatePicker/>
+```
+
+With default date set as today:
+```html
+<DatePicker showToday/>
+```html
+
+With locale:
+```html
+<DatePicker showToday locale="fr" onDatePicked={this.onDateSelect} />
+```
+
+Getting selected date value on a callback:
+```js
+onDateSelect(d) {
+console.log(d.toString());
+}
 ```
 
 ## Demo
 https://rajasegar.github.io/react-rethink-datepicker
 
 ## Things to do
-- Publish to npm
-- I18n
 - Leap year
 - Default Options
 - Tests

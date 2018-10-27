@@ -21,8 +21,9 @@ const Caption = styled.p`
 `;
 
 const YearButton = styled.button`
-  background: none;
-  border: ${props => (props.currentYear ? "1px solid black" : "none")};
+  background: ${props => (props.selected ? "green" : "none")};
+  border: ${props => (props.currentYear ? "1px dashed black" : "none")};
+  color: ${props => (props.selected ? "white" : "black")};
   cursor: pointer;
   padding: 4px;
   text-align: center;
@@ -91,6 +92,7 @@ class DatePicker extends Component {
     const years = [];
     for (let i = minYear; i < maxYear; i++) years.push(i);
     const { show } = this.state;
+    const { selected } = this.props;
     return (
       <Transition in={show}>
         <Caption>Select year</Caption>
