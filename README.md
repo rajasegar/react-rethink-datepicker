@@ -10,6 +10,10 @@ Rethinking the date picker UI by making date selection work for humans
 Based on this article by Jason Ford
 https://uxdesign.cc/rethinking-the-date-picker-ui-99b9dcb303ad
 
+## Install
+```
+npm install react-rethink-datepicker
+```
 
 ## Usage
 Default usage:
@@ -42,6 +46,7 @@ https://rajasegar.github.io/react-rethink-datepicker
 - Default Options
 - Tests
 - Storybook
+- Accessibility
 - And much more...
 
 ## Credits
